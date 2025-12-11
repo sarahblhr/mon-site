@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surprise Gorillaz 🎫</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@300;400;700&display=swap');
+  html,body{height:100%;margin:0;padding:0;}
+  body{
+    display:grid;place-items:center;
+    font-family:'itckabel', sans-serif;
+    color:#0d0d0d;
+    background: linear-gradient(135deg, #26d7c8 0%, #ffe66d 50%, #ff63ad 100%);
+    overflow:hidden;
+    position:relative;
+  }
+  .overlay{
+    position:absolute;
+    inset:0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.18), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.15), transparent 45%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0 6px, transparent 6px 12px);
+    mix-blend-mode:overlay;
+    pointer-events:none;
+  }
+  .card{
+    width:min(780px,92vw);
+    padding:32px;
+    border-radius:22px;
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 35px rgba(0,0,0,0.25);
+    position:relative;
+    text-align:center;
+  }
+  h1{
+    margin:0 0 12px;
+    font-family:'Bangers', cursive;
+    font-size:2.7rem;
+    color:#ea0058;
+    text-shadow:2px 2px rgba(0,0,0,0.2);
+  }
+  p.lead{
+    margin:0 0 18px;
+    color:#333;
+    font-size:1.15rem;
+  }
+  .count{display:flex;gap:14px;justify-content:center;margin:20px 0;}
+  .unit{
+    background:#ffffffd0;
+    backdrop-filter:blur(4px);
+    padding:14px 16px;
+    border-radius:14px;
+    min-width:70px;
+    border:2px solid #ff63ad;
+  }
+  .num{font-size:1.9rem;font-weight:700;color:#26a6d7;}
+  .label{font-size:0.75rem;color:#555;margin-top:6px;}
+  .cta{
+    margin-top:20px;
+    font-weight:600;
+    font-size:1.25rem;
+    color:#e0004f;
+    font-family:'Bangers', cursive;
+    letter-spacing:0.4px;
+    text-shadow:2px 2px rgba(255,255,255,0.5);
+  }
+  footer{margin-top:20px;color:#444;font-size:0.85rem;}
+</style>
+</head>
+
+<body>
+<div class="overlay"></div>
+<div class="card">
+  <h1>🎉 Gorillaz Countdown 🎉</h1>
+  <p class="lead">On approche du grand moment…</p>
+
+  <div id="count" class="count">
+    <div class="unit"><div class="num" id="days">--</div><div class="label">Jours</div></div>
+    <div class="unit"><div class="num" id="hours">--</div><div class="label">Heures</div></div>
+    <div class="unit"><div class="num" id="minutes">--</div><div class="label">Minutes</div></div>
+    <div class="unit"><div class="num" id="seconds">--</div><div class="label">Secondes</div></div>
+  </div>
+
+  <div id="message" class="cta">
+    Trop hâte d’aller voir Gorillaz avec toi mon amour.  
+    Merci d’être qui tu es la vie est meilleure avec toi.  
+    Je t’aime. Joyeux Noël 💛
+  </div>
+
+  <footer>Festival : vendredi 5 juin 2026 — 20h00</footer>
+</div>
+
+<script>
+let targetDate = new Date("2026-06-05T20:00:00");
+function updateCountdown(){
+  const now = new Date();
+  let diff = targetDate - now;
+  if(diff <= 0){
+    document.getElementById('count').style.display = 'none';
+    document.getElementById('message').textContent = "C'EST AUJOURD'HUI ! 🎉🔥 Prépare-toi mon amour 🌈";
+    return;
+  }
+  const s = Math.floor(diff/1000)%60;
+  const m = Math.floor(diff/1000/60)%60;
+  const h = Math.floor(diff/1000/60/60)%24;
+  const d = Math.floor(diff/1000/60/60/24);
+  document.getElementById('days').textContent = String(d).padStart(2,'0');
+  document.getElementById('hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('minutes').textContent = String(m).padStart(2,'0');
+  document.getElementById('seconds').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
